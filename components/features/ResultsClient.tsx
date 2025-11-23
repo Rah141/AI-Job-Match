@@ -113,9 +113,9 @@ await fetchMatchedJobs(false)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [resumeId])
 
-    const handleRematch = () => {
-        fetchMatchedJobs(true, true) // Force refresh when user clicks re-match
-    }
+   const handleRematch = () => {
+    fetchMatchedJobs(true) // Re-match when user clicks re-match
+}
 
     // Filter jobs based on search query
     const filteredJobs = jobs.filter(job => {
