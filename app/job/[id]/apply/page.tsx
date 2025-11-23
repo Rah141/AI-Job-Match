@@ -1,7 +1,7 @@
 // @ts-nocheck
 "use client";
 
-import React, { ... } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from "docx";
 import { saveAs } from "file-saver";
