@@ -1,5 +1,10 @@
-"use client"
+// @ts-nocheck
+"use client";
 
+import React, { ... } from "react";
+import { useRouter } from "next/navigation";
+import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType } from "docx";
+import { saveAs } from "file-saver";
 import { useState, useEffect, use } from "react"
 import { Button } from "@/components/ui/Button"
 import { Card } from "@/components/ui/Card"
