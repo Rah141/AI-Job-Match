@@ -1,0 +1,75 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  password      String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  resumes       Resume[]
+  applications  Application[]
+  
+  @@index([email])
+}
+
+model Resume {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  title     String   @default("My Resume")
+  content   String   // JSON string of structured resume data
+  rawText   String?  // Plain text for searching/AI
+  type      String   // "UPLOADED" or "GENERATED"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  applications Application[]
+  
+  @@index([userId])
+  @@index([userId, createdAt])
+}
+
+model Job {
+  id              String   @id @default(cuid())
+  title           String
+  company         String
+  location        String
+  jobType         String?
+  shortDescription String?
+  fullDescription String
+  sourceUrl       String?
+  postedAt        DateTime @default(now())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  applications    Application[]
+  
+  @@index([createdAt])
+  @@index([title, company])
+  @@index([sourceUrl])
+}
+
+model Application {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  jobId           String
+  job             Job      @relation(fields: [jobId], references: [id])
+  resumeId        String?
+  resume          Resume?  @relation(fields: [resumeId], references: [id])
+  status          String   @default("DRAFT") // DRAFT, APPLIED
+  coverLetter     String?
+  tailoredResume  String?  // JSON content of tailored resume
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  
+  @@index([userId])
+  @@index([jobId])
+  @@index([userId, status])
+}
