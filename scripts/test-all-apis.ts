@@ -3,7 +3,13 @@
  * Comprehensive API Test Script
  * Tests all API endpoints in the application
  */
+// @ts-nocheck
 
+function createFormData(fileContent: Buffer, fileName: string, mimeType: string): FormData {
+  const formData = new FormData()
+  const blob = new Blob([fileContent], { type: mimeType })
+  ...
+}
 import "dotenv/config"
 
 const BASE_URL = process.env.TEST_BASE_URL || "http://localhost:3000"
