@@ -181,7 +181,7 @@ export default async function JobPage({ params, searchParams }: JobPageProps) {
                                 <JobActions
                                     jobId={job.id}
                                     jobDescription={job.fullDescription}
-                                    jobSourceUrl={job.sourceUrl || undefined}
+                                    jobSourceUrl={job.sourceUrl ?? ""}
                                     resumeId={resumeId}
                                 />
                             ) : (
