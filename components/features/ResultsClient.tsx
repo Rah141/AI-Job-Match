@@ -94,7 +94,8 @@ export function ResultsClient({ resumeId, resumeTitle, initialResumeData }: Resu
             
             if (data.success) {
                 // After syncing, fetch matched jobs again (force refresh to get new jobs)
-                await fetchMatchedJobs(false, true)
+                // After syncing, fetch matched jobs again
+await fetchMatchedJobs(false)
                 alert(`Successfully synced ${data.total} jobs!`)
             } else {
                 alert(`Failed to sync jobs: ${data.message || "Unknown error"}`)
