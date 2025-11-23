@@ -185,7 +185,7 @@ export default async function JobPage({ params, searchParams }: JobPageProps) {
                                     resumeId={resumeId}
                                 />
                             ) : (
-                                <JobActionsGuest jobSourceUrl={job.sourceUrl || undefined} />
+                                <JobActionsGuest jobSourceUrl={job.sourceUrl ?? ""} />
                             )}
 
                             <div className="mt-6 pt-6 border-t border-gray-700">
